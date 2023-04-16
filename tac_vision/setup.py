@@ -6,7 +6,7 @@ setup(name='tacvis',
       package_dir={'': '.'},
       packages=['tacvis'],
       install_requires=[
-          'torch==1.11.0',
+        #   'torch==1.11.0',
           'pytorch-lightning',
           'torchvision',
           'Pillow',

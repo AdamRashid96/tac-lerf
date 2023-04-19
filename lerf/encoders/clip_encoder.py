@@ -20,6 +20,9 @@ class CLIPNetworkConfig(BaseImageEncoderConfig):
 
 class CLIPNetwork(BaseImageEncoder):
     def __init__(self, config: CLIPNetworkConfig):
+        print()
+        print("INITIAL:")
+        print()
         self.config = config
         self.process = torchvision.transforms.Compose(
             [
@@ -69,6 +72,7 @@ class CLIPNetwork(BaseImageEncoder):
         self.pos_embeds /= self.pos_embeds.norm(dim=-1, keepdim=True)
 
     def get_relevancy(self, embed: torch.Tensor, positive_id: int) -> torch.Tensor:
+        embed.size()
         phrases_embeds = torch.cat([self.pos_embeds, self.neg_embeds], dim=0)
         p = phrases_embeds.to(embed.dtype)  # phrases x 512
         output = torch.mm(embed, p.T)  # rays x phrases
